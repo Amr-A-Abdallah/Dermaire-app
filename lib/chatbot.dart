@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'dermaire_theme.dart';
 import 'dermaire_widgets.dart';
+import 'services/api_service.dart';
 
 enum AssistantReplyKind { education, uncertainty, escalation }
 
@@ -109,9 +110,21 @@ class _SkinAssistantScreenState extends State<SkinAssistantScreen> {
       input.clear();
       typing = true;
     });
-    await Future<void>.delayed(const Duration(milliseconds: 250));
+    AssistantReply reply;
+    try {
+      final res = await ApiService.instance.sendChatMessage(value);
+      final replyText = res['reply'] as String? ?? 'No response';
+      final kindStr = res['kind'] as String? ?? 'education';
+      final kind = switch (kindStr) {
+        'escalation' => AssistantReplyKind.escalation,
+        'uncertainty' => AssistantReplyKind.uncertainty,
+        _ => AssistantReplyKind.education,
+      };
+      reply = AssistantReply(replyText, kind);
+    } catch (_) {
+      reply = SkinAssistantSafety.reply(value);
+    }
     if (!mounted) return;
-    final reply = SkinAssistantSafety.reply(value);
     setState(() {
       messages.add(
         ChatMessage(text: reply.text, fromUser: false, kind: reply.kind),

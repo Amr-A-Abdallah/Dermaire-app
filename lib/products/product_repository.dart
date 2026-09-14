@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../services/api_service.dart';
 import 'product.dart';
 
 abstract interface class ProductRepository {
@@ -128,3 +129,31 @@ List<Product> seedProducts() {
     ),
   ];
 }
+
+class RemoteProductRepository implements ProductRepository {
+  RemoteProductRepository({LocalProductRepository? localFallback})
+      : _local = localFallback ?? LocalProductRepository();
+
+  final LocalProductRepository _local;
+
+  @override
+  Future<List<Product>> fetchProducts() async {
+    try {
+      final remoteList = await ApiService.instance.getProducts();
+      if (remoteList.isNotEmpty) {
+        final products = remoteList.map(Product.fromJson).toList();
+        await _local.saveProducts(products);
+        return products;
+      }
+    } catch (_) {
+      // Fallback to local cache when server is unreachable or offline
+    }
+    return _local.fetchProducts();
+  }
+
+  @override
+  Future<void> saveProducts(List<Product> products) async {
+    await _local.saveProducts(products);
+  }
+}
+

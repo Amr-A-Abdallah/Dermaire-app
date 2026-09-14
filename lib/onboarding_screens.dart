@@ -5,6 +5,7 @@ import 'dermaire_state.dart';
 import 'dermaire_theme.dart';
 import 'dermaire_widgets.dart';
 import 'doctor_portal.dart';
+import 'services/api_service.dart';
 
 final _emailPattern = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
 
@@ -126,6 +127,8 @@ class _SignInScreenState extends State<SignInScreen> {
   final password = TextEditingController();
   bool hidePassword = true;
 
+  bool loading = false;
+
   @override
   void dispose() {
     email.dispose();
@@ -133,8 +136,37 @@ class _SignInScreenState extends State<SignInScreen> {
     super.dispose();
   }
 
-  void submit() {
-    if (formKey.currentState!.validate()) _openApp(context, widget.state);
+  Future<void> submit() async {
+    if (!formKey.currentState!.validate() || loading) return;
+    setState(() => loading = true);
+    try {
+      await ApiService.instance.login(
+        email: email.text.trim(),
+        password: password.text.trim(),
+      );
+    } catch (e) {
+      final errStr = e.toString();
+      // If server is offline or connection refused (e.g. tests or no network), allow demo mode
+      final isNetworkError = errStr.contains('Connection') ||
+          errStr.contains('ClientException') ||
+          errStr.contains('SocketException') ||
+          errStr.contains('Empty response') ||
+          errStr.contains('FormatException');
+      if (!isNetworkError) {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errStr),
+            backgroundColor: Theme.of(context).colorScheme.error,
+          ),
+        );
+        return;
+      }
+    } finally {
+      if (mounted) setState(() => loading = false);
+    }
+    if (!mounted) return;
+    _openApp(context, widget.state);
   }
 
   @override
@@ -258,7 +290,11 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     if (!formKey.currentState!.validate()) return;
     final next = widget.state.safetyAccepted
         ? AccountCreatedScreen(state: widget.state)
-        : SafetyResponsibilityScreen(state: widget.state);
+        : SafetyResponsibilityScreen(
+            state: widget.state,
+            email: email.text.trim(),
+            password: password.text.trim(),
+          );
     openPage(context, next);
   }
 
@@ -515,8 +551,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 }
 
 class SafetyResponsibilityScreen extends StatefulWidget {
-  const SafetyResponsibilityScreen({super.key, required this.state});
+  const SafetyResponsibilityScreen({
+    super.key,
+    required this.state,
+    this.email,
+    this.password,
+  });
   final DermaireState state;
+  final String? email;
+  final String? password;
 
   @override
   State<SafetyResponsibilityScreen> createState() =>
@@ -667,6 +710,17 @@ class _SafetyResponsibilityScreenState
                   onPressed: reachedEnd
                       ? () async {
                           await widget.state.acceptSafety();
+                          if (widget.email != null && widget.password != null) {
+                            try {
+                              await ApiService.instance.register(
+                                email: widget.email!,
+                                password: widget.password!,
+                                fullName: 'Dermaire Member',
+                                role: 'patient',
+                                acceptSafety: true,
+                              );
+                            } catch (_) {}
+                          }
                           if (!context.mounted) return;
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(

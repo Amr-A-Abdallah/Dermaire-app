@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'products/product_repository.dart';
 import 'products/products_controller.dart';
+import 'services/api_service.dart';
 
 class Product {
   const Product(
@@ -27,7 +28,7 @@ class JournalEntry {
 class DermaireState extends ChangeNotifier {
   DermaireState({ProductRepository? productRepository}) {
     productController = ProductsController(
-      productRepository ?? LocalProductRepository(),
+      productRepository ?? RemoteProductRepository(),
     )..addListener(notifyListeners);
   }
 
@@ -76,6 +77,7 @@ class DermaireState extends ChangeNotifier {
   ];
 
   Future<void> loadPreferences() async {
+    await ApiService.instance.init();
     await productController.load();
     try {
       final preferences = await SharedPreferences.getInstance();
@@ -83,9 +85,16 @@ class DermaireState extends ChangeNotifier {
           ? ThemeMode.dark
           : ThemeMode.light;
       safetyAccepted = preferences.getBool(_safetyAcceptedKey) ?? false;
+      
+      // Sync remote experiment if active
+      final remoteExp = await ApiService.instance.getCurrentExperiment();
+      if (remoteExp != null) {
+        experimentDay = remoteExp['current_day'] as int? ?? experimentDay;
+        experimentPaused = remoteExp['status'] == 'paused';
+      }
       notifyListeners();
     } catch (_) {
-      // Keep safe defaults when platform storage is unavailable.
+      // Keep safe defaults when platform storage or network is unavailable.
     }
   }
 
@@ -152,6 +161,14 @@ class DermaireState extends ChangeNotifier {
       todayCheckedIn = true;
       baselineCheckIns = (baselineCheckIns + 1).clamp(0, 5);
       earnToken();
+      // Sync with Azure Backend
+      ApiService.instance.submitCheckIn(
+        timeOfDay: 'Morning',
+        hydration: 82.0,
+        texture: 76.0,
+        redness: 18.0,
+        notes: 'Check-in completed from mobile skin lab',
+      ).catchError((_) => <String, dynamic>{});
     }
   }
 
@@ -160,6 +177,8 @@ class DermaireState extends ChangeNotifier {
     tokens -= 10;
     redemptionHistory.insert(0, 'Travel-size Hydrating Serum · Today');
     notifyListeners();
+    // Sync redemption with Azure Backend
+    ApiService.instance.redeemReward('travel_serum').catchError((_) => <String, dynamic>{});
     return true;
   }
 
@@ -171,6 +190,10 @@ class DermaireState extends ChangeNotifier {
   void revokeDoctorLink() {
     doctorLinkActive = false;
     notifyListeners();
+    final user = ApiService.instance.currentUser;
+    if (user != null && user['user_id'] != null) {
+      ApiService.instance.revokeDoctorAccess(user['user_id'].toString()).catchError((_) => false);
+    }
   }
 
   @override

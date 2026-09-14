@@ -209,6 +209,8 @@ class ApiService {
     required double redness,
     String? notes,
     String? experimentId,
+    List<int>? photoBytes,
+    String? photoFilename,
   }) async {
     final request = http.MultipartRequest('POST', Uri.parse('$baseUrl/checkins'));
     if (_authToken != null) {
@@ -220,6 +222,14 @@ class ApiService {
     request.fields['redness_score'] = redness.toString();
     if (notes != null) request.fields['notes'] = notes;
     if (experimentId != null) request.fields['experiment_id'] = experimentId;
+
+    if (photoBytes != null && photoBytes.isNotEmpty) {
+      request.files.add(http.MultipartFile.fromBytes(
+        'photo',
+        photoBytes,
+        filename: photoFilename ?? 'skin_photo.jpg',
+      ));
+    }
 
     final streamedRes = await request.send();
     final res = await http.Response.fromStream(streamedRes);

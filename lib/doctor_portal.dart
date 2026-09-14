@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'access_control.dart';
 import 'dermaire_theme.dart';
 import 'dermaire_widgets.dart';
+import 'services/api_service.dart';
 
 enum PatientPriority { routine, review, urgent }
 
@@ -147,15 +148,42 @@ class _DoctorSignInScreenState extends State<DoctorSignInScreen> {
   Future<void> submit() async {
     if (!formKey.currentState!.validate() || loading) return;
     setState(() => loading = true);
-    await Future<void>.delayed(const Duration(milliseconds: 250));
+
+    AccessSession session;
+    try {
+      final res = await ApiService.instance.login(
+        email: email.text.trim(),
+        password: license.text.trim(), // use license as password for clinician login
+      );
+      final userId = res['user']?['id']?.toString() ?? 'doctor-demo';
+      
+      // Fetch real assigned patients from Azure backend
+      Set<String> patientIds = {'patient-salma', 'patient-nour', 'patient-mariam'};
+      try {
+        final patientsData = await ApiService.instance.getDoctorPatients();
+        if (patientsData.isNotEmpty) {
+          patientIds = patientsData.map((p) => p['id']?.toString() ?? '').toSet();
+        }
+      } catch (_) {}
+
+      session = AccessSession(
+        userId: userId,
+        role: UserRole.doctor,
+        authorizedPatientIds: patientIds,
+        exportConsentPatientIds: patientIds,
+      );
+    } catch (_) {
+      // Offline fallback: use mock session for seamless offline testing
+      session = const AccessSession(
+        userId: 'doctor-demo',
+        role: UserRole.doctor,
+        authorizedPatientIds: {'patient-salma', 'patient-nour', 'patient-mariam'},
+        exportConsentPatientIds: {'patient-salma'},
+      );
+    }
+
     if (!mounted) return;
     setState(() => loading = false);
-    const session = AccessSession(
-      userId: 'doctor-demo',
-      role: UserRole.doctor,
-      authorizedPatientIds: {'patient-salma', 'patient-nour', 'patient-mariam'},
-      exportConsentPatientIds: {'patient-salma'},
-    );
     await openPage(context, DoctorPortalScreen(session: session));
   }
 

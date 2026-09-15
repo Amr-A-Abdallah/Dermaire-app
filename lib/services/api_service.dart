@@ -116,6 +116,39 @@ class ApiService {
     } catch (_) {}
   }
 
+  Future<Map<String, dynamic>?> getCurrentUser() async {
+    final res = await http.get(Uri.parse('$baseUrl/users/me'), headers: _headers(false));
+    if (res.statusCode == 200 && res.body.isNotEmpty) {
+      final user = jsonDecode(res.body) as Map<String, dynamic>;
+      _currentUser = user;
+      return user;
+    }
+    return null;
+  }
+
+  Future<Map<String, dynamic>> updateSkinProfile({
+    String? skinType,
+    String? selectedGoal,
+    List<String>? skinConcerns,
+  }) async {
+    final bodyMap = <String, dynamic>{};
+    if (skinType != null) bodyMap['skin_type'] = skinType;
+    if (selectedGoal != null) bodyMap['selected_goal'] = selectedGoal;
+    if (skinConcerns != null) bodyMap['skin_concerns'] = skinConcerns;
+
+    final res = await http.patch(
+      Uri.parse('$baseUrl/users/skin-profile'),
+      headers: _headers(),
+      body: jsonEncode(bodyMap),
+    );
+    final data = jsonDecode(res.body) as Map<String, dynamic>;
+    if (res.statusCode >= 200 && res.statusCode < 300) {
+      _currentUser = data;
+      return data;
+    }
+    throw ApiException(data['message']?.toString() ?? 'Failed to update skin profile', data);
+  }
+
   Future<Map<String, dynamic>> sendChatMessage(String message) async {
     final res = await http.post(
       Uri.parse('$baseUrl/chat'),
@@ -134,11 +167,11 @@ class ApiService {
     bool? inRoutine,
     bool? inExperiment,
   }) async {
-    final uri = Uri.parse('$baseUrl/products').replace(queryParameters: {
-      if (category != null) 'category': category,
-      if (inRoutine != null) 'in_routine': inRoutine.toString(),
-      if (inExperiment != null) 'in_experiment': inExperiment.toString(),
-    }..removeWhere((key, value) => false));
+    final qp = <String, String>{};
+    if (category != null) qp['category'] = category;
+    if (inRoutine != null) qp['in_routine'] = inRoutine.toString();
+    if (inExperiment != null) qp['in_experiment'] = inExperiment.toString();
+    final uri = Uri.parse('$baseUrl/products').replace(queryParameters: qp.isNotEmpty ? qp : null);
     final res = await http.get(uri, headers: _headers(false));
     if (res.statusCode == 200) {
       final list = jsonDecode(res.body) as List<dynamic>;

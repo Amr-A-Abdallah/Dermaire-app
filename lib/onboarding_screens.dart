@@ -892,7 +892,15 @@ class SkinProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           FilledButton(
-            onPressed: () => _openApp(context, state),
+            onPressed: () async {
+              try {
+                await ApiService.instance.updateSkinProfile(
+                  skinConcerns: state.skinConcerns.toList(),
+                );
+              } catch (_) {}
+              if (!context.mounted) return;
+              _openApp(context, state);
+            },
             child: const Text('Continue to my skin lab'),
           ),
         ],

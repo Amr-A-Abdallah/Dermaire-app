@@ -594,6 +594,117 @@
             .project-card { grid-template-columns: 1fr; }
             .project-content-col { padding: 35px 25px; }
         }
+
+        /* Contact Us Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 22px;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 22px;
+            padding: 24px 28px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.35s ease;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(14px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--cyan-glow), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--cyan-glow);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 240, 255, 0.22);
+        }
+
+        .contact-card:hover::before {
+            opacity: 1;
+        }
+
+        .contact-icon-box {
+            width: 58px;
+            height: 58px;
+            border-radius: 16px;
+            border: 1px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-card:hover .contact-icon-box {
+            transform: scale(1.1) rotate(4deg);
+        }
+
+        .contact-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .contact-label {
+            font-size: 11.5px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+            color: var(--cyan-glow);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .contact-handle {
+            font-family: 'Outfit', sans-serif;
+            font-size: 16.5px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .contact-desc {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .contact-arrow {
+            color: var(--text-muted);
+            font-size: 14px;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .contact-card:hover .contact-arrow {
+            color: var(--cyan-glow);
+            transform: translate(3px, -3px);
+        }
+
     </style>
 </head>
 <body>
@@ -610,6 +721,7 @@
             <li><a href="#about">About Team</a></li>
             <li><a href="#projects">Our Projects</a></li>
             <li><a href="#members">Team Members</a></li>
+            <li><a href="#contact">Contact Us</a></li>
             <li><a href="/dermaire">Dermaire Details</a></li>
         </ul>
         <a href="/dermaire" class="btn-nav">
@@ -771,6 +883,97 @@
         </div>
     </section>
 
+
+    <!-- Contact Us Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">Get In Touch</div>
+                <h2 class="section-title">Connect With NeoVague</h2>
+                <p style="color: var(--text-muted); max-width: 600px; margin: 12px auto 0; font-size: 15px;">
+                    Have questions about Dermaire, collaboration opportunities, or research inquiries? Reach out to us across our official communication channels.
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Email -->
+                <a href="mailto:neovaguemicrosoft@gmail.com" class="contact-card">
+                    <div class="contact-icon-box" style="background: rgba(0, 240, 255, 0.12); color: var(--cyan-glow); border-color: rgba(0, 240, 255, 0.35);">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">Official Email</span>
+                        <h4 class="contact-handle">neovaguemicrosoft@gmail.com</h4>
+                        <p class="contact-desc">Direct inquiries, partnerships & project outreach</p>
+                    </div>
+                    <div class="contact-arrow">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://www.linkedin.com/in/neo-vague-602338437/" target="_blank" rel="noopener noreferrer" class="contact-card">
+                    <div class="contact-icon-box" style="background: rgba(10, 102, 194, 0.15); color: #0A66C2; border-color: rgba(10, 102, 194, 0.35);">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">LinkedIn</span>
+                        <h4 class="contact-handle">Neo Vague</h4>
+                        <p class="contact-desc">Professional network, careers & team announcements</p>
+                    </div>
+                    <div class="contact-arrow">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </a>
+
+                <!-- X (Twitter) -->
+                <a href="https://x.com/NeovagueDev" target="_blank" rel="noopener noreferrer" class="contact-card">
+                    <div class="contact-icon-box" style="background: rgba(255, 255, 255, 0.1); color: #ffffff; border-color: rgba(255, 255, 255, 0.3);">
+                        <i class="fa-brands fa-x-twitter"></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">X / Twitter</span>
+                        <h4 class="contact-handle">@NeovagueDev</h4>
+                        <p class="contact-desc">Real-time tech updates, devlogs & announcements</p>
+                    </div>
+                    <div class="contact-arrow">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/neovaguemicrosoft/" target="_blank" rel="noopener noreferrer" class="contact-card">
+                    <div class="contact-icon-box" style="background: rgba(225, 48, 108, 0.15); color: #E1306C; border-color: rgba(225, 48, 108, 0.35);">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">Instagram</span>
+                        <h4 class="contact-handle">@neovaguemicrosoft</h4>
+                        <p class="contact-desc">Behind-the-scenes, team stories & visual showcases</p>
+                    </div>
+                    <div class="contact-arrow">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </a>
+
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/share/18HTjpGGhA/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" class="contact-card">
+                    <div class="contact-icon-box" style="background: rgba(24, 119, 242, 0.15); color: #1877F2; border-color: rgba(24, 119, 242, 0.35);">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </div>
+                    <div class="contact-details">
+                        <span class="contact-label">Facebook</span>
+                        <h4 class="contact-handle">NeoVague Official</h4>
+                        <p class="contact-desc">Community discussions, milestones & media</p>
+                    </div>
+                    <div class="contact-arrow">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -780,6 +983,7 @@
                 </div>
                 <div>
                     <a href="/dermaire" style="color: var(--cyan-glow); text-decoration: none; font-weight: 700; margin-right: 24px;">Dermaire Product Page</a>
+                    <a href="#contact" style="color: #fff; text-decoration: none; font-weight: 600; margin-right: 24px;">Contact Us</a>
                     <a href="/docs" target="_blank" style="color: var(--text-muted); text-decoration: none;">API Documentation</a>
                 </div>
             </div>

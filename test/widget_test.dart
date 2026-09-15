@@ -126,7 +126,7 @@ void main() {
     await tester.enterText(find.byKey(const Key('signInPassword')), 'password');
     await tester.tap(find.widgetWithText(FilledButton, 'Sign in'));
     await tester.pumpAndSettle();
-    expect(find.text('Day 14 of 28'), findsOneWidget);
+    expect(find.textContaining('of 28'), findsOneWidget);
 
     await tester.tap(find.text('Products'));
     await tester.pumpAndSettle();

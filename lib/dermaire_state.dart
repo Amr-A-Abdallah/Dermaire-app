@@ -39,42 +39,19 @@ class DermaireState extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.light;
   bool safetyAccepted = false;
   int selectedTab = 0;
-  int tokens = 6;
-  int baselineCheckIns = 2;
-  int experimentDay = 14;
+  int tokens = 0;
+  int baselineCheckIns = 0;
+  int experimentDay = 1;
   bool experimentPaused = false;
   bool todayCheckedIn = false;
-  bool doctorLinkActive = true;
-  String selectedGoal = 'Reduce Acne';
-  final Set<String> skinConcerns = {'Redness'};
+  bool doctorLinkActive = false;
+  String selectedGoal = 'Improve Skin Texture';
+  final Set<String> skinConcerns = <String>{};
   final List<String> redemptionHistory = [];
-  final List<Product> products = [
-    const Product(
-      'Product X',
-      'Retinol 0.3% · Evening',
-      '🧴',
-      inExperiment: true,
-    ),
-    const Product('CeraVe Moisturizer', 'Morning & evening', '💧'),
-    const Product('SPF 30 Sunscreen', 'Morning', '☀️'),
-  ];
-  final List<JournalEntry> journal = [
-    const JournalEntry(
-      'Apr 22, 2025',
-      'Morning',
-      'Hydration: Good · Texture: Smooth',
-    ),
-    const JournalEntry(
-      'Apr 20, 2025',
-      'Evening',
-      'Redness: Low · Texture: Slightly rough',
-    ),
-    const JournalEntry(
-      'Apr 17, 2025',
-      'Morning',
-      'Hydration: Good · Texture: Good',
-    ),
-  ];
+  String userName = 'Skin Lab User';
+  String userEmail = '';
+  final List<Product> products = [];
+  final List<JournalEntry> journal = [];
 
   Future<void> loadPreferences() async {
     await ApiService.instance.init();
@@ -86,10 +63,38 @@ class DermaireState extends ChangeNotifier {
           : ThemeMode.light;
       safetyAccepted = preferences.getBool(_safetyAcceptedKey) ?? false;
       
+      // Fetch live user profile from Azure
+      final userProfile = await ApiService.instance.getCurrentUser();
+      if (userProfile != null) {
+        userName = userProfile['full_name'] as String? ?? userName;
+        userEmail = userProfile['email'] as String? ?? userEmail;
+        selectedGoal = userProfile['selected_goal'] as String? ?? selectedGoal;
+        if (userProfile['skin_concerns'] is List) {
+          skinConcerns.clear();
+          skinConcerns.addAll((userProfile['skin_concerns'] as List).cast<String>());
+        }
+      }
+
+      // Fetch live checkins from Azure to populate real journal
+      final checkins = await ApiService.instance.getCheckIns();
+      if (checkins.isNotEmpty) {
+        journal.clear();
+        for (final c in checkins) {
+          final dateStr = (c['created_at'] as String?)?.split('T').first ?? 'Recent';
+          final timeStr = c['time_of_day']?.toString().toUpperCase() ?? 'CHECK-IN';
+          final h = c['hydration_score'] ?? 70;
+          final r = c['redness_score'] ?? 20;
+          final t = c['texture_score'] ?? 70;
+          journal.add(JournalEntry(dateStr, timeStr, 'Hydration: $h · Redness: $r · Texture: $t'));
+        }
+        baselineCheckIns = checkins.length.clamp(0, 5);
+        tokens = checkins.length * 2;
+      }
+
       // Sync remote experiment if active
       final remoteExp = await ApiService.instance.getCurrentExperiment();
       if (remoteExp != null) {
-        experimentDay = remoteExp['current_day'] as int? ?? experimentDay;
+        experimentDay = remoteExp['current_day'] as int? ?? 1;
         experimentPaused = remoteExp['status'] == 'paused';
       }
       notifyListeners();

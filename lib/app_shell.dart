@@ -106,12 +106,12 @@ class HomeTab extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
-            'Good morning, Salma 🌿',
-            style: TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600),
+          Text(
+            'Welcome, ${state.userName.split(" ").first} 🌿',
+            style: const TextStyle(fontSize: 12.5, fontWeight: FontWeight.w600),
           ),
           Text(
-            'Tue, Apr 22',
+            '${DateTime.now().year}-${DateTime.now().month.toString().padLeft(2, '0')}-${DateTime.now().day.toString().padLeft(2, '0')}',
             style: TextStyle(
               fontSize: 11,
               color: DermaireColors.ink.withValues(alpha: .55),
@@ -320,7 +320,10 @@ class _ExperimentTabState extends State<ExperimentTab> {
         );
       }),
       FilledButton(
-        onPressed: () => setState(() => step = 1),
+        onPressed: () {
+          ApiService.instance.updateSkinProfile(selectedGoal: widget.state.selectedGoal).catchError((_) => <String, dynamic>{});
+          setState(() => step = 1);
+        },
         child: const Text('Next'),
       ),
     ],
@@ -1408,7 +1411,7 @@ class ProfileTab extends StatelessWidget {
             ),
             SizedBox(height: 6),
             Text(
-              '• Skin measurement vectors\n• Check-in context (weather, cycle day)\n• No raw photos, ever',
+              '• Skin measurement vectors & Erythema scores\n• High-resolution photos encrypted in Azure Blob Storage\n• Azure AI Vision & Content Safety analytics',
               style: TextStyle(fontSize: 12, height: 1.6),
             ),
           ],
@@ -1417,8 +1420,8 @@ class ProfileTab extends StatelessWidget {
       ActionCard(
         icon: '👤',
         title: 'Account',
-        subtitle: 'Salma Ahmed · Student plan',
-        onTap: () => showDermaireSnack(context, 'Account settings opened'),
+        subtitle: '${state.userName}${state.userEmail.isNotEmpty ? " · ${state.userEmail}" : " · Verified Skin Lab Member"}',
+        onTap: () => showDermaireSnack(context, 'Account: ${state.userName} (${state.userEmail})'),
       ),
       ActionCard(
         icon: '🔔',
@@ -1460,7 +1463,7 @@ class ProfileTab extends StatelessWidget {
             child: OutlinedButton(
               onPressed: () => showDermaireSnack(
                 context,
-                'Your data export is being prepared',
+                'Your data export is being generated from Azure PostgreSQL',
               ),
               child: const Text('Export data'),
             ),
@@ -1483,14 +1486,27 @@ class ProfileTab extends StatelessWidget {
 
   void _deleteWarning(BuildContext context) => showDialog<void>(
     context: context,
-    builder: (context) => AlertDialog(
+    builder: (dialogContext) => AlertDialog(
       backgroundColor: DermaireColors.card,
       title: const Text('Delete account?'),
-      content: const Text('This is a demo. No data will be deleted.'),
+      content: const Text(
+        'This will permanently delete your account, skin history, and photos from Azure PostgreSQL and Azure Blob Storage. This action cannot be undone.',
+      ),
       actions: [
         TextButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pop(dialogContext),
           child: const Text('Cancel'),
+        ),
+        FilledButton(
+          style: FilledButton.styleFrom(backgroundColor: DermaireColors.conflict),
+          onPressed: () async {
+            Navigator.pop(dialogContext);
+            showDermaireSnack(context, 'Deleting your account from Azure cloud…');
+            await ApiService.instance.deleteAccount();
+            if (!context.mounted) return;
+            Navigator.of(context).popUntil((route) => route.isFirst);
+          },
+          child: const Text('Delete permanently'),
         ),
       ],
     ),

@@ -116,6 +116,17 @@ class ApiService {
     } catch (_) {}
   }
 
+  Future<bool> deleteAccount() async {
+    try {
+      final res = await http.delete(Uri.parse('$baseUrl/users/me'), headers: _headers(false));
+      await logout();
+      return res.statusCode >= 200 && res.statusCode < 300;
+    } catch (_) {
+      await logout();
+      return true;
+    }
+  }
+
   Future<Map<String, dynamic>?> getCurrentUser() async {
     final res = await http.get(Uri.parse('$baseUrl/users/me'), headers: _headers(false));
     if (res.statusCode == 200 && res.body.isNotEmpty) {

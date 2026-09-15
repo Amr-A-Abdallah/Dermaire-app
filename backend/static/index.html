@@ -3,50 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeoVague Team | Innovating at the Intersection of AI, Health & Engineering</title>
-    <meta name="description" content="NeoVague — A team of four engineers and product creators from Faculty of Computer and Artificial Intelligence, Helwan University, creating evidence-based healthcare intelligence.">
+    <title>NeoVague — Solutions For A Brighter Tomorrow</title>
+    <meta name="description" content="NeoVague — A passionate team of four engineers from Faculty of Computer Science and Information Systems, Ain Shams University, innovating at the intersection of AI, health, and software engineering.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --cream-bg: #FDFBF7;
-            --card-cream: #FFFFFF;
-            --burgundy: #5B1B29;
-            --burgundy-deep: #3E101B;
-            --burgundy-light: #7A2437;
-            --gold: #C5A880;
-            --gold-light: #EBDBC5;
-            --gold-glow: rgba(197, 168, 128, 0.25);
-            --charcoal: #1E1A1D;
-            --text-muted: #6B6267;
-            --border-subtle: rgba(91, 27, 41, 0.1);
-            --shadow-subtle: 0 10px 30px rgba(91, 27, 41, 0.05);
-            --shadow-hover: 0 20px 40px rgba(91, 27, 41, 0.12);
+            --bg-deep: #060714;
+            --bg-card: rgba(15, 17, 38, 0.7);
+            --bg-card-hover: rgba(22, 26, 58, 0.85);
+            --cyan-glow: #00F0FF;
+            --blue-neon: #3877FF;
+            --purple-neon: #9D00FF;
+            --magenta-glow: #E024FF;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border-glow: rgba(0, 240, 255, 0.2);
+            --border-purple: rgba(157, 0, 255, 0.25);
+            --gradient-accent: linear-gradient(135deg, #00F0FF 0%, #3877FF 50%, #9D00FF 100%);
+            --gradient-btn: linear-gradient(135deg, #00c6ff 0%, #0072ff 50%, #9d00ff 100%);
+            --shadow-glow: 0 0 35px rgba(0, 240, 255, 0.2);
+            --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--cream-bg);
-            color: var(--charcoal);
-            line-height: 1.65;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.7;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Ambient Glow Effect */
-        .ambient-glow {
+        /* Dynamic Cosmic Animated Grid Background */
+        .ambient-stars {
             position: fixed;
-            top: 0; left: 50%;
-            transform: translateX(-50%);
-            width: 100vw; height: 100vh;
+            top: 0; left: 0; width: 100vw; height: 100vh;
             pointer-events: none; z-index: 0;
             background: 
-                radial-gradient(circle at 15% 15%, rgba(197, 168, 128, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 85% 20%, rgba(91, 27, 41, 0.07) 0%, transparent 45%),
-                radial-gradient(circle at 50% 85%, rgba(197, 168, 128, 0.12) 0%, transparent 50%);
+                radial-gradient(circle at 15% 20%, rgba(0, 240, 255, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 85% 15%, rgba(157, 0, 255, 0.16) 0%, transparent 50%),
+                radial-gradient(circle at 50% 70%, rgba(56, 119, 255, 0.14) 0%, transparent 55%);
+        }
+
+        .ambient-grid {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
         }
 
         .container {
@@ -57,15 +68,15 @@
             z-index: 1;
         }
 
-        /* Header Navigation */
+        /* Navigation */
         nav {
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 100;
-            background: rgba(253, 251, 247, 0.9);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(6, 7, 20, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glow);
             padding: 16px 40px;
             display: flex;
             align-items: center;
@@ -77,35 +88,13 @@
             align-items: center;
             gap: 14px;
             text-decoration: none;
-            color: var(--burgundy);
         }
 
-        .team-logo-svg {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-deep) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(91, 27, 41, 0.25);
-            border: 1px solid var(--gold);
-        }
-
-        .brand-text h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            color: var(--burgundy);
-        }
-
-        .brand-sub {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--gold);
-            font-weight: 700;
+        .logo-img-nav {
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.5));
         }
 
         .nav-links {
@@ -116,26 +105,27 @@
         }
 
         .nav-links a {
-            color: var(--charcoal);
+            color: var(--text-muted);
             text-decoration: none;
             font-weight: 600;
-            font-size: 15px;
-            transition: color 0.2s ease;
+            font-size: 14.5px;
+            transition: all 0.25s ease;
         }
 
         .nav-links a:hover {
-            color: var(--burgundy-light);
+            color: var(--cyan-glow);
+            text-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
         }
 
         .btn-nav {
             padding: 10px 24px;
             border-radius: 30px;
-            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-light) 100%);
+            background: var(--gradient-btn);
             color: #fff;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            box-shadow: 0 4px 15px rgba(91, 27, 41, 0.2);
+            font-weight: 700;
+            font-size: 13.5px;
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
             transition: all 0.25s ease;
             display: inline-flex;
             align-items: center;
@@ -144,57 +134,123 @@
 
         .btn-nav:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(91, 27, 41, 0.3);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.7);
+        }
+
+        /* Banner Artwork Section */
+        .banner-wrap {
+            margin-top: 100px;
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(157, 0, 255, 0.25);
+            border: 1px solid var(--border-glow);
+        }
+
+        .banner-img {
+            width: 100%;
+            height: auto;
+            max-height: 520px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .banner-wrap:hover .banner-img {
+            transform: scale(1.02);
+        }
+
+        .banner-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 40px 30px 24px;
+            background: linear-gradient(to top, rgba(6, 7, 20, 0.95) 0%, transparent 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .banner-caption {
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: #E2E8F0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .banner-caption span {
+            color: var(--cyan-glow);
+            text-shadow: 0 0 10px var(--cyan-glow);
         }
 
         /* Hero Section */
         .hero {
-            padding: 170px 0 100px;
+            padding: 70px 0 90px;
             text-align: center;
         }
 
-        .univ-tag {
+        .univ-pill {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 8px 22px;
+            padding: 8px 24px;
             border-radius: 30px;
-            background: #fff;
-            border: 1px solid var(--border-subtle);
-            box-shadow: var(--shadow-subtle);
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-glow);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
             margin-bottom: 28px;
+            animation: pulseGlow 4s infinite alternate;
         }
 
-        .univ-tag i { color: var(--gold); font-size: 15px; }
-        .univ-tag span {
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 15px rgba(0, 240, 255, 0.15); }
+            100% { box-shadow: 0 0 25px rgba(157, 0, 255, 0.35); }
+        }
+
+        .univ-pill i { color: var(--cyan-glow); font-size: 16px; }
+        .univ-pill span {
             font-size: 13.5px;
             font-weight: 700;
-            color: var(--burgundy);
+            color: #fff;
             letter-spacing: 0.5px;
         }
 
-        .hero h2 {
+        /* Exact Typography preserved from screenshot with futuristic neon aesthetic */
+        .hero h1 {
             font-family: 'Playfair Display', serif;
             font-size: 58px;
             font-weight: 700;
             line-height: 1.18;
-            color: var(--burgundy-deep);
+            color: #fff;
             max-width: 950px;
             margin: 0 auto 24px;
+            letter-spacing: -0.5px;
         }
 
-        .hero h2 span.accent {
-            color: var(--burgundy-light);
+        .hero h1 span.highlight {
             font-style: italic;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
         }
 
         .hero-story {
             font-size: 19px;
             color: var(--text-muted);
-            max-width: 820px;
+            max-width: 840px;
             margin: 0 auto 40px;
             font-weight: 400;
             line-height: 1.8;
+        }
+
+        .hero-story strong {
+            color: #fff;
+            font-weight: 700;
         }
 
         .hero-actions {
@@ -205,10 +261,10 @@
             flex-wrap: wrap;
         }
 
-        .btn-primary {
+        .btn-featured {
             padding: 16px 36px;
             border-radius: 36px;
-            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-light) 100%);
+            background: var(--gradient-btn);
             color: #fff;
             text-decoration: none;
             font-weight: 700;
@@ -216,44 +272,46 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 8px 25px rgba(91, 27, 41, 0.25);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
             transition: all 0.25s ease;
         }
 
-        .btn-primary:hover {
+        .btn-featured:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(91, 27, 41, 0.35);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.7);
         }
 
-        .btn-secondary {
-            padding: 16px 30px;
+        .btn-meet-team {
+            padding: 16px 32px;
             border-radius: 36px;
-            background: #fff;
-            border: 1px solid var(--border-subtle);
-            color: var(--charcoal);
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
             text-decoration: none;
             font-weight: 600;
             font-size: 16px;
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            box-shadow: var(--shadow-subtle);
+            backdrop-filter: blur(10px);
             transition: all 0.25s ease;
         }
 
-        .btn-secondary:hover {
-            border-color: var(--gold);
+        .btn-meet-team:hover {
+            border-color: var(--cyan-glow);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
             transform: translateY(-2px);
         }
 
-        /* Mission Statement Box */
+        /* Collective Mission Statement */
         .mission-box {
-            background: #fff;
-            border: 1px solid var(--border-subtle);
-            border-radius: 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 28px;
             padding: 48px;
             margin-top: 70px;
-            box-shadow: var(--shadow-subtle);
+            backdrop-filter: blur(16px);
+            box-shadow: var(--shadow-card);
             text-align: left;
             position: relative;
             overflow: hidden;
@@ -262,25 +320,27 @@
         .mission-box::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 6px; height: 100%;
-            background: linear-gradient(to bottom, var(--gold), var(--burgundy));
+            top: 0; left: 0; width: 5px; height: 100%;
+            background: var(--gradient-accent);
+            box-shadow: 0 0 15px var(--cyan-glow);
         }
 
         .mission-eyebrow {
             font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--gold);
+            letter-spacing: 2.5px;
+            color: var(--cyan-glow);
             font-weight: 800;
             margin-bottom: 12px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
         }
 
         .mission-quote {
             font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            color: var(--burgundy-deep);
-            line-height: 1.6;
-            margin-bottom: 16px;
+            font-size: 24px;
+            color: #fff;
+            line-height: 1.5;
+            margin-bottom: 18px;
         }
 
         .mission-text {
@@ -289,72 +349,72 @@
             line-height: 1.8;
         }
 
-        /* Sections */
+        /* Projects Section */
         .section {
             padding: 90px 0;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 55px;
+            margin-bottom: 60px;
         }
 
         .section-eyebrow {
-            font-size: 12.5px;
+            font-size: 13px;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--gold);
+            color: var(--cyan-glow);
             margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
         }
 
         .section-title {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Outfit', sans-serif;
             font-size: 42px;
-            font-weight: 700;
-            color: var(--burgundy-deep);
+            font-weight: 800;
+            color: #fff;
             letter-spacing: -0.5px;
         }
 
-        /* Projects Section */
         .project-card {
-            background: #fff;
-            border: 1px solid var(--border-subtle);
-            border-radius: 28px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 32px;
             overflow: hidden;
-            box-shadow: var(--shadow-subtle);
+            box-shadow: var(--shadow-card);
             display: grid;
             grid-template-columns: 1fr 1fr;
-            transition: all 0.35s ease;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(16px);
         }
 
         .project-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--gold);
+            transform: translateY(-8px);
+            border-color: var(--cyan-glow);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 35px rgba(0, 240, 255, 0.25);
         }
 
         .project-image-col {
-            background: #FAF6F0;
+            background: rgba(10, 14, 34, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 40px;
             position: relative;
-            overflow: hidden;
         }
 
         .project-logo-img {
             max-width: 320px;
             width: 100%;
             height: auto;
-            border-radius: 20px;
-            box-shadow: 0 14px 30px rgba(91, 27, 41, 0.15);
+            border-radius: 24px;
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 255, 255, 0.1);
             transition: transform 0.4s ease;
         }
 
         .project-card:hover .project-logo-img {
-            transform: scale(1.03);
+            transform: scale(1.04);
         }
 
         .project-content-col {
@@ -370,19 +430,20 @@
             gap: 8px;
             font-size: 12px;
             font-weight: 700;
-            color: var(--burgundy);
-            background: rgba(91, 27, 41, 0.08);
-            padding: 6px 14px;
+            color: var(--cyan-glow);
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            padding: 6px 16px;
             border-radius: 20px;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             align-self: flex-start;
         }
 
         .project-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 34px;
-            font-weight: 700;
-            color: var(--burgundy-deep);
+            font-family: 'Outfit', sans-serif;
+            font-size: 38px;
+            font-weight: 800;
+            color: #fff;
             margin-bottom: 14px;
         }
 
@@ -397,23 +458,23 @@
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-bottom: 32px;
+            margin-bottom: 34px;
         }
 
         .pill {
             font-size: 12.5px;
             font-weight: 600;
-            color: var(--burgundy-light);
-            background: #FDFBF7;
-            border: 1px solid var(--border-subtle);
-            padding: 5px 14px;
+            color: #CBD5E1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 16px;
             border-radius: 12px;
         }
 
         .btn-view-project {
-            padding: 14px 28px;
+            padding: 14px 32px;
             border-radius: 30px;
-            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-light) 100%);
+            background: var(--gradient-btn);
             color: #fff;
             text-decoration: none;
             font-weight: 700;
@@ -422,13 +483,13 @@
             align-items: center;
             gap: 10px;
             align-self: flex-start;
-            box-shadow: 0 6px 20px rgba(91, 27, 41, 0.2);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
             transition: all 0.25s ease;
         }
 
         .btn-view-project:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(91, 27, 41, 0.3);
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.6);
         }
 
         /* Team Members Grid */
@@ -439,49 +500,50 @@
         }
 
         .member-card {
-            background: #fff;
-            border: 1px solid var(--border-subtle);
-            border-radius: 24px;
-            padding: 36px 24px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-purple);
+            border-radius: 28px;
+            padding: 38px 24px;
             text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-subtle);
+            transition: all 0.35s ease;
+            box-shadow: var(--shadow-card);
+            backdrop-filter: blur(14px);
             position: relative;
         }
 
         .member-card:hover {
             transform: translateY(-8px);
-            border-color: var(--gold);
-            box-shadow: var(--shadow-hover);
+            border-color: var(--cyan-glow);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 240, 255, 0.25);
         }
 
         .member-avatar-wrap {
-            width: 96px;
-            height: 96px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             margin: 0 auto 20px;
-            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-light) 100%);
+            background: var(--gradient-accent);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 34px;
+            font-size: 38px;
             color: #fff;
-            border: 3px solid var(--gold-light);
-            box-shadow: 0 8px 20px rgba(91, 27, 41, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.35);
         }
 
         .member-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 21px;
             font-weight: 700;
-            color: var(--burgundy-deep);
+            color: #fff;
             margin-bottom: 4px;
         }
 
         .member-name-ar {
             font-size: 13.5px;
             color: var(--text-muted);
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             font-weight: 500;
         }
 
@@ -489,10 +551,11 @@
             font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.8px;
-            color: var(--burgundy);
-            background: rgba(91, 27, 41, 0.08);
-            padding: 4px 14px;
+            letter-spacing: 1px;
+            color: var(--cyan-glow);
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 5px 16px;
             border-radius: 20px;
             display: inline-block;
             margin-bottom: 16px;
@@ -501,17 +564,17 @@
         .member-desc {
             font-size: 13.5px;
             color: var(--text-muted);
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
         /* Footer */
         footer {
-            border-top: 1px solid var(--border-subtle);
+            border-top: 1px solid var(--border-glow);
             padding: 50px 0 30px;
-            background: #FAF6F0;
+            background: #03040A;
             color: var(--text-muted);
             font-size: 14px;
-            margin-top: 40px;
+            margin-top: 60px;
         }
 
         .footer-content {
@@ -526,7 +589,7 @@
         @media (max-width: 860px) {
             nav { padding: 14px 20px; }
             .nav-links { display: none; }
-            .hero h2 { font-size: 38px; }
+            .hero h1 { font-size: 38px; }
             .hero-story { font-size: 16px; }
             .project-card { grid-template-columns: 1fr; }
             .project-content-col { padding: 35px 25px; }
@@ -535,27 +598,17 @@
 </head>
 <body>
 
-    <div class="ambient-glow"></div>
+    <div class="ambient-stars"></div>
+    <div class="ambient-grid"></div>
 
     <!-- Navigation -->
     <nav>
         <a href="/" class="brand-logo">
-            <div class="team-logo-svg">
-                <!-- NeoVague Custom Monogram Logo -->
-                <svg width="26" height="26" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 78V22L50 58L80 22V78" stroke="#C5A880" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="50" cy="58" r="7" fill="#FDFBF7"/>
-                    <path d="M35 88H65" stroke="#C5A880" stroke-width="6" stroke-linecap="round"/>
-                </svg>
-            </div>
-            <div class="brand-text">
-                <h1>NeoVague</h1>
-                <div class="brand-sub">Faculty of Computer and Artificial Intelligence, Helwan University</div>
-            </div>
+            <img src="/static/neovague-logo.png" alt="NeoVague Logo" class="logo-img-nav">
         </a>
         <ul class="nav-links">
             <li><a href="#about">About Team</a></li>
-            <li><a href="#projects">Projects</a></li>
+            <li><a href="#projects">Our Projects</a></li>
             <li><a href="#members">Team Members</a></li>
             <li><a href="/dermaire">Dermaire Details</a></li>
         </ul>
@@ -564,37 +617,56 @@
         </a>
     </nav>
 
+    <div class="container">
+        <!-- Team Artwork & Panoramic Banner Showcase -->
+        <div class="banner-wrap">
+            <img src="/static/neovague-banner.jpg" alt="NeoVague Team Concept Artwork" class="banner-img">
+            <div class="banner-overlay">
+                <div class="banner-caption">
+                    <span>// IDEAS // CODE // IMPACT</span> · NEOVAGUE 2026-2027
+                </div>
+                <div style="color: var(--cyan-glow); font-size: 13px; font-weight: 700; letter-spacing: 1px;">
+                    <i class="fa-solid fa-satellite-dish"></i> SOLUTIONS FOR A BRIGHTER TOMORROW
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero" id="about">
         <div class="container">
-            <div class="univ-tag">
+            <!-- University Badge with exact Faculty of Computer Science and Information Systems, Ain Shams University -->
+            <div class="univ-pill">
                 <i class="fa-solid fa-graduation-cap"></i>
-                <span>Faculty of Computer and Artificial Intelligence, Helwan University</span>
+                <span>Faculty of Computer Science and Information Systems, Ain Shams University</span>
             </div>
-            <h2>
-                We Are <span class="accent">NeoVague</span>. Engineering Real Solutions For Complex Needs.
-            </h2>
+
+            <!-- Exact requested Headline Structure & Typography -->
+            <h1>
+                We Are <span class="highlight">NeoVague</span>. Engineering Real Solutions For Complex Needs.
+            </h1>
+
             <p class="hero-story">
-                We are a team of four students from <strong>Faculty of Computer and Artificial Intelligence, Helwan University</strong>, who came together around one shared frustration: skincare advice online is generic, contradictory, and impossible to verify for your own skin.
+                We are a team of four students from <strong>Faculty of Computer Science and Information Systems, Ain Shams University</strong>, who came together around one shared frustration: skincare advice online is generic, contradictory, and impossible to verify for your own skin.
             </p>
 
             <div class="hero-actions">
-                <a href="#projects" class="btn-primary">
+                <a href="#projects" class="btn-featured">
                     <i class="fa-solid fa-layer-group"></i> Our Featured Project
                 </a>
-                <a href="#members" class="btn-secondary">
+                <a href="#members" class="btn-meet-team">
                     <i class="fa-solid fa-users"></i> Meet The Team
                 </a>
             </div>
 
             <!-- Collective Mission Statement Box -->
             <div class="mission-box">
-                <div class="mission-eyebrow">The NeoVague Vision & Philosophy</div>
+                <div class="mission-eyebrow">The NeoVague Engineering Philosophy</div>
                 <div class="mission-quote">
                     "Good skincare decisions should come from personal data, not guesswork."
                 </div>
                 <p class="mission-text">
-                    Our backgrounds span <strong>software engineering, cloud architecture, UI/UX design, and product research</strong>, which lets us cover Dermaire end-to-end — from the guided on-device camera capture and Azure-based backend, to the experiment logic and the user-facing app design. What unites us is a shared belief that evidence and personal data should empower human wellness, and we built Dermaire to prove that idea can actually work as a real, scientifically grounded product rather than just another photo-filter skin app.
+                    Our backgrounds span <strong>software engineering, cloud architecture, UI/UX design, and product research</strong>, which lets us cover Dermaire end-to-end — from the guided on-device camera capture and Azure-based backend, to the experiment logic and the user-facing app design. What unites us is a shared belief that good skincare decisions should come from personal data, not guesswork, and we built Dermaire to prove that idea can actually work as a real, scientifically grounded product rather than just another photo-filter skin app.
                 </p>
             </div>
         </div>
@@ -608,24 +680,24 @@
                 <h2 class="section-title">Our Projects</h2>
             </div>
 
-            <!-- Project Card: Dermaire -->
+            <!-- Featured Project Card: Dermaire -->
             <div class="project-card">
                 <div class="project-image-col">
                     <img src="/static/dermaire-logo.jpg" alt="Dermaire Logo & Brand" class="project-logo-img">
                 </div>
                 <div class="project-content-col">
                     <div class="project-badge">
-                        <i class="fa-solid fa-shield-halved"></i> Microsoft Imagine Cup 2027 Contender
+                        <i class="fa-brands fa-microsoft"></i> Microsoft Imagine Cup 2027 Contender
                     </div>
                     <h3 class="project-title">Dermaire</h3>
                     <p class="project-desc">
                         A clinical personal skin lab mobile app that replaces internet guesswork with an N-of-1 trial model. Tracks Erythema redness and surface roughness through normalized daily photography and Azure AI Vision 4.0, while automatically blocking dangerous active-ingredient combinations.
                     </p>
                     <div class="project-pills">
-                        <span class="pill"><i class="fa-solid fa-eye"></i> Azure AI Vision 4.0</span>
-                        <span class="pill"><i class="fa-solid fa-brain"></i> Azure OpenAI GPT-4o</span>
-                        <span class="pill"><i class="fa-solid fa-flask"></i> Clinical Conflict Engine</span>
-                        <span class="pill"><i class="fa-solid fa-mobile"></i> Flutter iOS & Android</span>
+                        <span class="pill"><i class="fa-solid fa-eye" style="color: var(--cyan-glow);"></i> Azure AI Vision 4.0</span>
+                        <span class="pill"><i class="fa-solid fa-brain" style="color: var(--magenta-glow);"></i> Azure OpenAI GPT-4o</span>
+                        <span class="pill"><i class="fa-solid fa-flask" style="color: var(--blue-neon);"></i> Clinical Conflict Engine</span>
+                        <span class="pill"><i class="fa-solid fa-mobile" style="color: #fff;"></i> Flutter iOS & Android</span>
                     </div>
                     <a href="/dermaire" class="btn-view-project">
                         View Product Details & Downloads <i class="fa-solid fa-arrow-right"></i>
@@ -636,10 +708,10 @@
     </section>
 
     <!-- Team Members Section -->
-    <section class="section" id="members" style="background: #FAF6F0;">
+    <section class="section" id="members">
         <div class="container">
             <div class="section-header">
-                <div class="section-eyebrow">Engineers & Creators</div>
+                <div class="section-eyebrow">The Creators</div>
                 <h2 class="section-title">Meet The NeoVague Team</h2>
             </div>
 
@@ -659,7 +731,7 @@
 
                 <!-- Member 2: Amr Abdallah -->
                 <div class="member-card">
-                    <div class="member-avatar-wrap" style="background: linear-gradient(135deg, #7A2437 0%, #C5A880 100%);">
+                    <div class="member-avatar-wrap" style="background: linear-gradient(135deg, #3877FF 0%, #00F0FF 100%);">
                         <i class="fa-solid fa-laptop-code"></i>
                     </div>
                     <h3 class="member-name">Amr Abdallah</h3>
@@ -672,7 +744,7 @@
 
                 <!-- Member 3: Salma NasrAllah -->
                 <div class="member-card">
-                    <div class="member-avatar-wrap" style="background: linear-gradient(135deg, #5B1B29 0%, #3E101B 100%);">
+                    <div class="member-avatar-wrap" style="background: linear-gradient(135deg, #9D00FF 0%, #E024FF 100%);">
                         <i class="fa-solid fa-user-doctor"></i>
                     </div>
                     <h3 class="member-name">Salma NasrAllah</h3>
@@ -685,7 +757,7 @@
 
                 <!-- Member 4: Salma Khalil -->
                 <div class="member-card">
-                    <div class="member-avatar-wrap" style="background: linear-gradient(135deg, #C5A880 0%, #7A2437 100%);">
+                    <div class="member-avatar-wrap" style="background: linear-gradient(135deg, #E024FF 0%, #3877FF 100%);">
                         <i class="fa-solid fa-palette"></i>
                     </div>
                     <h3 class="member-name">Salma Khalil</h3>
@@ -704,23 +776,16 @@
         <div class="container">
             <div class="footer-content">
                 <div class="brand-logo">
-                    <div class="team-logo-svg" style="width: 34px; height: 34px;">
-                        <svg width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20 78V22L50 58L80 22V78" stroke="#C5A880" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <strong style="color: var(--burgundy); font-family: 'Playfair Display', serif; font-size: 18px;">NeoVague</strong>
-                    </div>
+                    <img src="/static/neovague-logo.png" alt="NeoVague" style="height: 32px; filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4));">
                 </div>
                 <div>
-                    <a href="/dermaire" style="color: var(--burgundy); text-decoration: none; font-weight: 700; margin-right: 20px;">Dermaire Product Page</a>
+                    <a href="/dermaire" style="color: var(--cyan-glow); text-decoration: none; font-weight: 700; margin-right: 24px;">Dermaire Product Page</a>
                     <a href="/docs" target="_blank" style="color: var(--text-muted); text-decoration: none;">API Documentation</a>
                 </div>
             </div>
-            <div style="text-align: center; border-top: 1px solid var(--border-subtle); padding-top: 24px;">
+            <div style="text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 24px;">
                 <p style="font-size: 13px;">
-                    &copy; 2026-2027 <strong>NeoVague Team</strong> · Faculty of Computer and Artificial Intelligence, Helwan University. All rights reserved.
+                    &copy; 2026-2027 <strong>NeoVague Team</strong> · Faculty of Computer Science and Information Systems, Ain Shams University. All rights reserved.
                 </p>
             </div>
         </div>

@@ -68,12 +68,19 @@ os.makedirs(static_dir, exist_ok=True)
 app.mount("/api/v1/static/uploads", StaticFiles(directory=uploads_dir), name="uploads")
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
-@app.get("/", tags=["Showcase Landing Page"])
+@app.get("/", tags=["NeoVague Team Showcase"])
 def serve_landing_page():
     index_path = os.path.join(static_dir, "index.html")
     if os.path.exists(index_path):
         return FileResponse(index_path)
-    return {"message": "Dermaire Personal Skin Lab API is running. Visit /docs for Swagger UI."}
+    return {"message": "NeoVague Team API is running. Visit /docs for Swagger UI."}
+
+@app.get("/dermaire", tags=["Dermaire Product Details"])
+def serve_dermaire_page():
+    dermaire_path = os.path.join(static_dir, "dermaire.html")
+    if os.path.exists(dermaire_path):
+        return FileResponse(dermaire_path)
+    return FileResponse(os.path.join(static_dir, "index.html"))
 
 # Include API v1 Router
 app.include_router(api_v1_router, prefix=settings.API_V1_STR)

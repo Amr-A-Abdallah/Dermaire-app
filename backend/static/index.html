@@ -3,43 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dermaire | Personal AI Skin Lab — Microsoft Imagine Cup 2027</title>
-    <meta name="description" content="Dermaire Personal Skin Lab — Evidence-based, clinical dermatology tracker powered by Microsoft Azure Cloud, Azure AI Vision, and Azure OpenAI.">
+    <title>NeoVague Team | Innovating at the Intersection of AI, Health & Engineering</title>
+    <meta name="description" content="NeoVague — A team of four engineers and product creators from Faculty of Computer and Artificial Intelligence, Helwan University, creating evidence-based healthcare intelligence.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --primary: #0F172A;
-            --primary-light: #1E293B;
-            --accent: #0EA5E9;
-            --accent-glow: rgba(14, 165, 233, 0.35);
-            --azure-blue: #0078D4;
-            --teal: #14B8A6;
-            --rose: #F43F5E;
-            --bg-dark: #0B0F19;
-            --card-bg: rgba(30, 41, 59, 0.65);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --text-main: #F8FAFC;
-            --text-muted: #94A3B8;
-            --gradient-azure: linear-gradient(135deg, #0EA5E9 0%, #0078D4 50%, #6366F1 100%);
-            --gradient-accent: linear-gradient(135deg, #38BDF8 0%, #818CF8 100%);
-            --radius-lg: 24px;
-            --radius-md: 16px;
-            --radius-sm: 10px;
+            --cream-bg: #FDFBF7;
+            --card-cream: #FFFFFF;
+            --burgundy: #5B1B29;
+            --burgundy-deep: #3E101B;
+            --burgundy-light: #7A2437;
+            --gold: #C5A880;
+            --gold-light: #EBDBC5;
+            --gold-glow: rgba(197, 168, 128, 0.25);
+            --charcoal: #1E1A1D;
+            --text-muted: #6B6267;
+            --border-subtle: rgba(91, 27, 41, 0.1);
+            --shadow-subtle: 0 10px 30px rgba(91, 27, 41, 0.05);
+            --shadow-hover: 0 20px 40px rgba(91, 27, 41, 0.12);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--cream-bg);
+            color: var(--charcoal);
+            line-height: 1.65;
             overflow-x: hidden;
-            line-height: 1.6;
         }
 
+        /* Ambient Glow Effect */
         .ambient-glow {
             position: fixed;
             top: 0; left: 50%;
@@ -47,613 +44,687 @@
             width: 100vw; height: 100vh;
             pointer-events: none; z-index: 0;
             background: 
-                radial-gradient(circle at 20% 15%, rgba(14, 165, 233, 0.15) 0%, transparent 45%),
-                radial-gradient(circle at 80% 25%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 50% 80%, rgba(20, 184, 166, 0.1) 0%, transparent 50%);
-        }
-
-        nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 100;
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            background: rgba(11, 15, 25, 0.75);
-            border-bottom: 1px solid var(--card-border);
-            padding: 18px 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--text-main);
-        }
-
-        .logo-icon {
-            width: 42px; height: 42px;
-            border-radius: 12px;
-            background: var(--gradient-azure);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px; color: #fff;
-            box-shadow: 0 0 20px var(--accent-glow);
-        }
-
-        .brand-text h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 22px; font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        .brand-badge {
-            font-size: 10px; padding: 2px 8px;
-            border-radius: 20px;
-            background: rgba(14, 165, 233, 0.15);
-            border: 1px solid rgba(14, 165, 233, 0.3);
-            color: var(--accent); font-weight: 600;
-            text-transform: uppercase; letter-spacing: 0.8px;
-        }
-
-        .nav-links {
-            display: flex; align-items: center;
-            gap: 32px; list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 500; font-size: 15px;
-            transition: color 0.25s ease;
-        }
-
-        .nav-links a:hover { color: var(--text-main); }
-
-        .btn-nav {
-            padding: 10px 22px; border-radius: 30px;
-            background: var(--gradient-azure);
-            color: #fff; text-decoration: none;
-            font-weight: 600; font-size: 14px;
-            box-shadow: 0 4px 14px var(--accent-glow);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            display: inline-flex; align-items: center; gap: 8px;
-        }
-
-        .btn-nav:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px var(--accent-glow);
+                radial-gradient(circle at 15% 15%, rgba(197, 168, 128, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 20%, rgba(91, 27, 41, 0.07) 0%, transparent 45%),
+                radial-gradient(circle at 50% 85%, rgba(197, 168, 128, 0.12) 0%, transparent 50%);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
-            position: relative; z-index: 1;
+            position: relative;
+            z-index: 1;
         }
 
+        /* Header Navigation */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(253, 251, 247, 0.9);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            color: var(--burgundy);
+        }
+
+        .team-logo-svg {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-deep) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(91, 27, 41, 0.25);
+            border: 1px solid var(--gold);
+        }
+
+        .brand-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--burgundy);
+        }
+
+        .brand-sub {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--burgundy-light);
+        }
+
+        .btn-nav {
+            padding: 10px 24px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-light) 100%);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(91, 27, 41, 0.2);
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-nav:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(91, 27, 41, 0.3);
+        }
+
+        /* Hero Section */
         .hero {
             padding: 170px 0 100px;
             text-align: center;
         }
 
-        .hero-competition-tag {
-            display: inline-flex; align-items: center;
-            gap: 10px; padding: 8px 20px;
+        .univ-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 22px;
             border-radius: 30px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(10px);
+            background: #fff;
+            border: 1px solid var(--border-subtle);
+            box-shadow: var(--shadow-subtle);
             margin-bottom: 28px;
         }
 
-        .hero-competition-tag i { color: #00A4EF; }
-        .hero-competition-tag span {
-            font-size: 13px; font-weight: 600;
-            color: var(--text-main); letter-spacing: 0.5px;
+        .univ-tag i { color: var(--gold); font-size: 15px; }
+        .univ-tag span {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--burgundy);
+            letter-spacing: 0.5px;
         }
 
         .hero h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 56px; font-weight: 800;
-            line-height: 1.15; letter-spacing: -1.5px;
-            max-width: 900px; margin: 0 auto 24px;
+            font-family: 'Playfair Display', serif;
+            font-size: 58px;
+            font-weight: 700;
+            line-height: 1.18;
+            color: var(--burgundy-deep);
+            max-width: 950px;
+            margin: 0 auto 24px;
         }
 
-        .hero h2 .highlight {
-            background: var(--gradient-accent);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .hero h2 span.accent {
+            color: var(--burgundy-light);
+            font-style: italic;
         }
 
-        .hero-description {
-            font-size: 19px; color: var(--text-muted);
-            max-width: 720px; margin: 0 auto 40px;
+        .hero-story {
+            font-size: 19px;
+            color: var(--text-muted);
+            max-width: 820px;
+            margin: 0 auto 40px;
             font-weight: 400;
+            line-height: 1.8;
         }
 
-        .hero-cta {
-            display: flex; align-items: center;
-            justify-content: center; gap: 18px;
-            flex-wrap: wrap; margin-bottom: 60px;
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .btn-primary {
-            padding: 16px 32px; border-radius: 36px;
-            background: var(--gradient-azure);
-            color: #fff; text-decoration: none;
-            font-weight: 700; font-size: 16px;
-            display: inline-flex; align-items: center; gap: 10px;
-            box-shadow: 0 8px 25px var(--accent-glow);
+            padding: 16px 36px;
+            border-radius: 36px;
+            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-light) 100%);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 25px rgba(91, 27, 41, 0.25);
             transition: all 0.25s ease;
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(14, 165, 233, 0.5);
+            box-shadow: 0 12px 30px rgba(91, 27, 41, 0.35);
         }
 
         .btn-secondary {
-            padding: 16px 28px; border-radius: 36px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: var(--text-main); text-decoration: none;
-            font-weight: 600; font-size: 16px;
-            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 30px;
+            border-radius: 36px;
+            background: #fff;
+            border: 1px solid var(--border-subtle);
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow-subtle);
             transition: all 0.25s ease;
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.25);
+            border-color: var(--gold);
             transform: translateY(-2px);
         }
 
-        .tech-strip {
-            display: flex; align-items: center;
-            justify-content: center; gap: 36px;
-            flex-wrap: wrap; padding: 24px 36px;
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid var(--card-border);
-            border-radius: 20px; backdrop-filter: blur(12px);
-            max-width: 950px; margin: 0 auto;
+        /* Mission Statement Box */
+        .mission-box {
+            background: #fff;
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 48px;
+            margin-top: 70px;
+            box-shadow: var(--shadow-subtle);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
         }
 
-        .tech-item {
-            display: flex; align-items: center; gap: 10px;
-            color: var(--text-muted); font-size: 13px; font-weight: 600;
+        .mission-box::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 6px; height: 100%;
+            background: linear-gradient(to bottom, var(--gold), var(--burgundy));
         }
 
-        .tech-item i { color: var(--accent); font-size: 16px; }
-
-        .section { padding: 100px 0; }
-        .section-header { text-align: center; margin-bottom: 60px; }
-
-        .section-eyebrow {
-            color: var(--accent); font-size: 13px; font-weight: 700;
-            text-transform: uppercase; letter-spacing: 1.5px;
+        .mission-eyebrow {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            font-weight: 800;
             margin-bottom: 12px;
         }
 
+        .mission-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: var(--burgundy-deep);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .mission-text {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Sections */
+        .section {
+            padding: 90px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-eyebrow {
+            font-size: 12.5px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
         .section-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 38px; font-weight: 700; letter-spacing: -0.5px;
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--burgundy-deep);
+            letter-spacing: -0.5px;
         }
 
-        .features-grid {
+        /* Projects Section */
+        .project-card {
+            background: #fff;
+            border: 1px solid var(--border-subtle);
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 28px;
+            grid-template-columns: 1fr 1fr;
+            transition: all 0.35s ease;
         }
 
-        .feature-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-lg);
-            padding: 36px 30px; transition: all 0.3s ease;
-            position: relative; overflow: hidden;
-        }
-
-        .feature-card:hover {
+        .project-card:hover {
             transform: translateY(-6px);
-            border-color: rgba(14, 165, 233, 0.4);
-            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--gold);
         }
 
-        .feature-icon {
-            width: 58px; height: 58px;
-            border-radius: var(--radius-md);
-            background: rgba(14, 165, 233, 0.1);
-            border: 1px solid rgba(14, 165, 233, 0.25);
-            display: flex; align-items: center;
-            justify-content: center; font-size: 24px;
-            color: var(--accent); margin-bottom: 24px;
+        .project-image-col {
+            background: #FAF6F0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .feature-card h3 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 22px; font-weight: 700; margin-bottom: 14px;
+        .project-logo-img {
+            max-width: 320px;
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 14px 30px rgba(91, 27, 41, 0.15);
+            transition: transform 0.4s ease;
         }
 
-        .feature-card p {
-            color: var(--text-muted); font-size: 15px; line-height: 1.6;
+        .project-card:hover .project-logo-img {
+            transform: scale(1.03);
         }
 
-        .feature-badge {
-            margin-top: 20px; display: inline-block;
-            font-size: 12px; font-weight: 600; color: #38BDF8;
-            background: rgba(56, 189, 248, 0.1);
-            padding: 4px 12px; border-radius: 20px;
+        .project-content-col {
+            padding: 50px 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .arch-box {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-lg);
-            padding: 48px; margin-top: 40px;
+        .project-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--burgundy);
+            background: rgba(91, 27, 41, 0.08);
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-bottom: 16px;
+            align-self: flex-start;
         }
 
-        .arch-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 24px; margin-top: 32px;
+        .project-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--burgundy-deep);
+            margin-bottom: 14px;
         }
 
-        .arch-card {
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: var(--radius-md);
-            padding: 24px; border-top: 3px solid var(--azure-blue);
+        .project-desc {
+            color: var(--text-muted);
+            font-size: 15.5px;
+            line-height: 1.7;
+            margin-bottom: 24px;
         }
 
-        .arch-card h4 {
-            font-size: 16px; font-weight: 700; margin-bottom: 8px;
-            color: var(--text-main); display: flex; align-items: center; gap: 8px;
+        .project-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 32px;
         }
 
-        .arch-card p {
-            font-size: 13px; color: var(--text-muted); line-height: 1.5;
+        .pill {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--burgundy-light);
+            background: #FDFBF7;
+            border: 1px solid var(--border-subtle);
+            padding: 5px 14px;
+            border-radius: 12px;
         }
 
+        .btn-view-project {
+            padding: 14px 28px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-light) 100%);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            align-self: flex-start;
+            box-shadow: 0 6px 20px rgba(91, 27, 41, 0.2);
+            transition: all 0.25s ease;
+        }
+
+        .btn-view-project:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(91, 27, 41, 0.3);
+        }
+
+        /* Team Members Grid */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 30px;
+            gap: 28px;
         }
 
-        .team-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: var(--radius-lg);
-            padding: 36px 24px; text-align: center;
-            transition: all 0.3s ease; position: relative;
+        .member-card {
+            background: #fff;
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            padding: 36px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-subtle);
+            position: relative;
         }
 
-        .team-card:hover {
+        .member-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(99, 102, 241, 0.4);
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--gold);
+            box-shadow: var(--shadow-hover);
         }
 
-        .team-avatar {
-            width: 100px; height: 100px;
-            border-radius: 50%; margin: 0 auto 20px;
-            background: var(--gradient-azure);
-            display: flex; align-items: center;
-            justify-content: center; font-size: 38px; color: #fff;
-            border: 3px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        .member-avatar-wrap {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--burgundy) 0%, var(--burgundy-light) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+            color: #fff;
+            border: 3px solid var(--gold-light);
+            box-shadow: 0 8px 20px rgba(91, 27, 41, 0.2);
         }
 
-        .team-name {
-            font-family: 'Outfit', sans-serif;
-            font-size: 20px; font-weight: 700; margin-bottom: 6px;
+        .member-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--burgundy-deep);
+            margin-bottom: 4px;
         }
 
-        .team-name-ar {
-            font-size: 14px; color: var(--text-muted);
-            margin-bottom: 12px; font-weight: 500;
+        .member-name-ar {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-weight: 500;
         }
 
-        .team-role {
-            font-size: 13px; color: var(--accent); font-weight: 600;
-            background: rgba(14, 165, 233, 0.1);
-            padding: 4px 14px; border-radius: 20px;
-            display: inline-block; margin-bottom: 16px;
+        .member-role {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--burgundy);
+            background: rgba(91, 27, 41, 0.08);
+            padding: 4px 14px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 16px;
         }
 
-        .team-bio {
-            font-size: 13.5px; color: var(--text-muted); line-height: 1.5;
+        .member-desc {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
 
-        .download-cta {
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.15) 0%, rgba(99, 102, 241, 0.15) 100%);
-            border: 1px solid rgba(14, 165, 233, 0.3);
-            border-radius: var(--radius-lg);
-            padding: 70px 40px; text-align: center;
-            margin: 80px 0; position: relative; overflow: hidden;
-        }
-
-        .download-cta h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 42px; font-weight: 800; margin-bottom: 16px;
-        }
-
-        .download-cta p {
-            font-size: 17px; color: var(--text-muted);
-            max-width: 650px; margin: 0 auto 36px;
-        }
-
-        .store-buttons {
-            display: flex; align-items: center;
-            justify-content: center; gap: 20px; flex-wrap: wrap;
-        }
-
-        .btn-store {
-            background: #000; border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff; padding: 14px 28px; border-radius: 14px;
-            text-decoration: none; display: inline-flex;
-            align-items: center; gap: 14px; transition: all 0.25s ease;
-        }
-
-        .btn-store:hover {
-            border-color: #fff; transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-        }
-
-        .btn-store i { font-size: 30px; }
-        .btn-store .store-text { text-align: left; line-height: 1.2; }
-        .btn-store .store-text span {
-            font-size: 11px; text-transform: uppercase;
-            color: var(--text-muted); letter-spacing: 0.5px;
-        }
-        .btn-store .store-text strong { font-size: 17px; display: block; }
-
+        /* Footer */
         footer {
-            border-top: 1px solid var(--card-border);
-            padding: 50px 0 30px; background: #070B13;
-            color: var(--text-muted); font-size: 14px;
+            border-top: 1px solid var(--border-subtle);
+            padding: 50px 0 30px;
+            background: #FAF6F0;
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 40px;
         }
 
         .footer-content {
-            display: flex; align-items: center;
-            justify-content: space-between; flex-wrap: wrap;
-            gap: 20px; margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
-        .footer-note { font-size: 13px; color: #64748B; }
-
-        @media (max-width: 768px) {
-            nav { padding: 16px 20px; }
+        @media (max-width: 860px) {
+            nav { padding: 14px 20px; }
             .nav-links { display: none; }
             .hero h2 { font-size: 38px; }
-            .hero-description { font-size: 16px; }
-            .download-cta { padding: 40px 20px; }
-            .download-cta h2 { font-size: 30px; }
+            .hero-story { font-size: 16px; }
+            .project-card { grid-template-columns: 1fr; }
+            .project-content-col { padding: 35px 25px; }
         }
     </style>
 </head>
 <body>
+
     <div class="ambient-glow"></div>
 
+    <!-- Navigation -->
     <nav>
-        <a href="#" class="nav-brand">
-            <div class="logo-icon"><i class="fa-solid fa-dna"></i></div>
-            <div class="brand-text"><h1>Dermaire</h1></div>
-            <span class="brand-badge">Imagine Cup 2027</span>
+        <a href="/" class="brand-logo">
+            <div class="team-logo-svg">
+                <!-- NeoVague Custom Monogram Logo -->
+                <svg width="26" height="26" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 78V22L50 58L80 22V78" stroke="#C5A880" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="50" cy="58" r="7" fill="#FDFBF7"/>
+                    <path d="M35 88H65" stroke="#C5A880" stroke-width="6" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="brand-text">
+                <h1>NeoVague</h1>
+                <div class="brand-sub">Faculty of Computer and Artificial Intelligence, Helwan University</div>
+            </div>
         </a>
         <ul class="nav-links">
-            <li><a href="#features">Features</a></li>
-            <li><a href="#azure">Azure Stack</a></li>
-            <li><a href="#team">Team</a></li>
-            <li><a href="#download">Get App</a></li>
-            <li><a href="/docs" target="_blank">API Docs</a></li>
+            <li><a href="#about">About Team</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#members">Team Members</a></li>
+            <li><a href="/dermaire">Dermaire Details</a></li>
         </ul>
-        <a href="#download" class="btn-nav">
-            <i class="fa-solid fa-mobile-screen"></i> Download App
+        <a href="/dermaire" class="btn-nav">
+            <i class="fa-solid fa-sparkles"></i> Explore Dermaire
         </a>
     </nav>
 
-    <section class="hero">
+    <!-- Hero Section -->
+    <section class="hero" id="about">
         <div class="container">
-            <div class="hero-competition-tag">
-                <i class="fa-brands fa-microsoft"></i>
-                <span>Microsoft Imagine Cup 2027 Contender</span>
+            <div class="univ-tag">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>Faculty of Computer and Artificial Intelligence, Helwan University</span>
             </div>
-            <h2>Your Personal <span class="highlight">Evidence-Based</span> AI Skin Lab</h2>
-            <p class="hero-description">
-                Bridging responsible clinical dermatology with Microsoft Azure Cloud & AI. Track real skin evolution, prevent chemical product conflicts, and consult GPT-4o with certified clinical safety guardrails.
+            <h2>
+                We Are <span class="accent">NeoVague</span>. Engineering Real Solutions For Complex Needs.
+            </h2>
+            <p class="hero-story">
+                We are a team of four students from <strong>Faculty of Computer and Artificial Intelligence, Helwan University</strong>, who came together around one shared frustration: skincare advice online is generic, contradictory, and impossible to verify for your own skin.
             </p>
-            <div class="hero-cta">
-                <a href="#download" class="btn-primary"><i class="fa-solid fa-download"></i> Get Mobile Experience</a>
-                <a href="#features" class="btn-secondary"><i class="fa-solid fa-circle-play"></i> Explore Clinical AI</a>
+
+            <div class="hero-actions">
+                <a href="#projects" class="btn-primary">
+                    <i class="fa-solid fa-layer-group"></i> Our Featured Project
+                </a>
+                <a href="#members" class="btn-secondary">
+                    <i class="fa-solid fa-users"></i> Meet The Team
+                </a>
             </div>
 
-            <div class="tech-strip">
-                <div class="tech-item"><i class="fa-solid fa-cloud"></i> Azure Blob Storage</div>
-                <div class="tech-item"><i class="fa-solid fa-eye"></i> Azure AI Vision 4.0</div>
-                <div class="tech-item"><i class="fa-solid fa-brain"></i> Azure OpenAI GPT-4o</div>
-                <div class="tech-item"><i class="fa-solid fa-shield-halved"></i> Azure Content Safety</div>
-                <div class="tech-item"><i class="fa-solid fa-database"></i> Azure PostgreSQL</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="features">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-eyebrow">Clinical Intelligence</div>
-                <h2 class="section-title">Built for Real Clinical Science, Not Guesswork</h2>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-camera-viewfinder"></i></div>
-                    <h3>Computer Vision Check-ins</h3>
-                    <p>High-precision skin scan analysis tracking Erythema (redness), surface roughness texture, and stratum corneum hydration levels with daily photo normalization.</p>
-                    <span class="feature-badge">Azure AI Vision 4.0</span>
+            <!-- Collective Mission Statement Box -->
+            <div class="mission-box">
+                <div class="mission-eyebrow">The NeoVague Vision & Philosophy</div>
+                <div class="mission-quote">
+                    "Good skincare decisions should come from personal data, not guesswork."
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-flask-vial"></i></div>
-                    <h3>Clinical Conflict Engine</h3>
-                    <p>Algorithmic screening of cosmetic ingredients to automatically prevent skin barrier damage from dangerous simultaneous combinations like Retinoids and AHA/BHA.</p>
-                    <span class="feature-badge">Evidence-Based Pharmacovigilance</span>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-comment-medical"></i></div>
-                    <h3>Responsible Medical AI</h3>
-                    <p>Real-time intelligent skin assistant powered by Azure OpenAI GPT-4o, shielded by continuous Azure Content Safety for immediate red-flag emergency escalation.</p>
-                    <span class="feature-badge">Azure OpenAI + Content Safety</span>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-user-doctor"></i></div>
-                    <h3>Certified Clinician Portal</h3>
-                    <p>Secure, time-bounded QR code authorization for dermatologists to review patient trends, examine uncompressed high-res images, and record clinical notes.</p>
-                    <span class="feature-badge">HIPAA Compliant & RBAC</span>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-chart-line-up"></i></div>
-                    <h3>Scientific Experimentation</h3>
-                    <p>Isolate variables using the N-of-1 trial model. Test single products over 14–28 days to objectively determine true skin tolerance and clinical efficacy.</p>
-                    <span class="feature-badge">N-of-1 Protocol</span>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fa-solid fa-lock"></i></div>
-                    <h3>Enterprise Cloud Security</h3>
-                    <p>Every clinical action and record access creates an immutable append-only audit trail. Photos are encrypted and served via ephemeral SAS access tokens.</p>
-                    <span class="feature-badge">Azure Key Vault & Blob</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="azure" style="background: rgba(15, 23, 42, 0.4);">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-eyebrow">Enterprise Cloud Infrastructure</div>
-                <h2 class="section-title">Proudly Powered by 100% Microsoft Azure</h2>
-            </div>
-            <div class="arch-box">
-                <h3 style="font-family: 'Outfit'; font-size: 24px; margin-bottom: 12px;">Architecture Designed for Microsoft Imagine Cup 2027</h3>
-                <p style="color: var(--text-muted); font-size: 15px;">
-                    Dermaire completely avoids third-party APIs in favor of a cohesive, secure, and compliant Microsoft Azure cloud topology designed to scale to millions of patients.
-                </p>
-                <div class="arch-grid">
-                    <div class="arch-card">
-                        <h4><i class="fa-solid fa-cloud-arrow-up" style="color: #0EA5E9;"></i> Storage Layer</h4>
-                        <p>Azure Blob Storage with private access tiers, automated lifecycle management, and short-lived SAS URIs for client rendering.</p>
-                    </div>
-                    <div class="arch-card">
-                        <h4><i class="fa-solid fa-wand-magic-sparkles" style="color: #6366F1;"></i> Cognitive Services</h4>
-                        <p>Azure AI Vision multimodal model processing skin texture and erythema with sub-second inference latency.</p>
-                    </div>
-                    <div class="arch-card">
-                        <h4><i class="fa-solid fa-shield-halved" style="color: #14B8A6;"></i> Trust & Safety</h4>
-                        <p>Azure AI Content Safety filtering medical liability risks and triggering immediate anaphylaxis/infection warnings.</p>
-                    </div>
-                    <div class="arch-card">
-                        <h4><i class="fa-solid fa-server" style="color: #F43F5E;"></i> Compute & Data</h4>
-                        <p>FastAPI async engine backed by Azure Database for PostgreSQL with row-level security and JWT encryption.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="team">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-eyebrow">The Creators</div>
-                <h2 class="section-title">Meet the Imagine Cup 2027 Team</h2>
-                <p style="color: var(--text-muted); max-width: 600px; margin: 12px auto 0;">
-                    Four visionary engineers and healthcare innovators committed to making evidence-based dermatology accessible, secure, and personalized worldwide.
+                <p class="mission-text">
+                    Our backgrounds span <strong>software engineering, cloud architecture, UI/UX design, and product research</strong>, which lets us cover Dermaire end-to-end — from the guided on-device camera capture and Azure-based backend, to the experiment logic and the user-facing app design. What unites us is a shared belief that evidence and personal data should empower human wellness, and we built Dermaire to prove that idea can actually work as a real, scientifically grounded product rather than just another photo-filter skin app.
                 </p>
             </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">Flagship Innovation</div>
+                <h2 class="section-title">Our Projects</h2>
+            </div>
+
+            <!-- Project Card: Dermaire -->
+            <div class="project-card">
+                <div class="project-image-col">
+                    <img src="/static/dermaire-logo.jpg" alt="Dermaire Logo & Brand" class="project-logo-img">
+                </div>
+                <div class="project-content-col">
+                    <div class="project-badge">
+                        <i class="fa-solid fa-shield-halved"></i> Microsoft Imagine Cup 2027 Contender
+                    </div>
+                    <h3 class="project-title">Dermaire</h3>
+                    <p class="project-desc">
+                        A clinical personal skin lab mobile app that replaces internet guesswork with an N-of-1 trial model. Tracks Erythema redness and surface roughness through normalized daily photography and Azure AI Vision 4.0, while automatically blocking dangerous active-ingredient combinations.
+                    </p>
+                    <div class="project-pills">
+                        <span class="pill"><i class="fa-solid fa-eye"></i> Azure AI Vision 4.0</span>
+                        <span class="pill"><i class="fa-solid fa-brain"></i> Azure OpenAI GPT-4o</span>
+                        <span class="pill"><i class="fa-solid fa-flask"></i> Clinical Conflict Engine</span>
+                        <span class="pill"><i class="fa-solid fa-mobile"></i> Flutter iOS & Android</span>
+                    </div>
+                    <a href="/dermaire" class="btn-view-project">
+                        View Product Details & Downloads <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Members Section -->
+    <section class="section" id="members" style="background: #FAF6F0;">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-eyebrow">Engineers & Creators</div>
+                <h2 class="section-title">Meet The NeoVague Team</h2>
+            </div>
+
             <div class="team-grid">
-                <div class="team-card">
-                    <div class="team-avatar"><i class="fa-solid fa-user-astronaut"></i></div>
-                    <div class="team-name">Hossam El-Ghandoul</div>
-                    <div class="team-name-ar">حسام الغندول</div>
-                    <div class="team-role">AI & Cloud Solutions Architect</div>
-                    <p class="team-bio">Leads Azure cloud infrastructure, AI Vision pipelines, secure backend orchestration, and compliance architectures.</p>
+                <!-- Member 1: Hussam Waleed Elgandour -->
+                <div class="member-card">
+                    <div class="member-avatar-wrap">
+                        <i class="fa-solid fa-user-astronaut"></i>
+                    </div>
+                    <h3 class="member-name">Hussam Waleed Elgandour</h3>
+                    <div class="member-name-ar">حسام وليد الغندور</div>
+                    <div class="member-role">AI & Cloud Solutions Architect</div>
+                    <p class="member-desc">
+                        Directs Microsoft Azure cloud infrastructure, AI Vision pipeline orchestration, backend security compliance, and system-wide data integrity.
+                    </p>
                 </div>
-                <div class="team-card">
-                    <div class="team-avatar" style="background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%);"><i class="fa-solid fa-user-doctor"></i></div>
-                    <div class="team-name">Salma Nasrallah</div>
-                    <div class="team-name-ar">سلمى نصر الله</div>
-                    <div class="team-role">Clinical Informatics & Product Lead</div>
-                    <p class="team-bio">Drives clinical research protocols, pharmacovigilance ingredient conflict rules, and clinician workflow integration.</p>
+
+                <!-- Member 2: Amr Abdallah -->
+                <div class="member-card">
+                    <div class="member-avatar-wrap" style="background: linear-gradient(135deg, #7A2437 0%, #C5A880 100%);">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h3 class="member-name">Amr Abdallah</h3>
+                    <div class="member-name-ar">عمرو عبد الله</div>
+                    <div class="member-role">Lead Mobile & Flutter Engineer</div>
+                    <p class="member-desc">
+                        Engineers the cross-platform mobile client, hardware camera sensors, responsive state architectures, and smooth real-time UI interactions.
+                    </p>
                 </div>
-                <div class="team-card">
-                    <div class="team-avatar" style="background: linear-gradient(135deg, #0EA5E9 0%, #14B8A6 100%);"><i class="fa-solid fa-laptop-code"></i></div>
-                    <div class="team-name">Amr Abdallah</div>
-                    <div class="team-name-ar">عمرو عبد الله</div>
-                    <div class="team-role">Lead Mobile & Flutter Engineer</div>
-                    <p class="team-bio">Architects the cross-platform mobile client, camera sensor integration, state management, and real-time UI/UX interactions.</p>
+
+                <!-- Member 3: Salma NasrAllah -->
+                <div class="member-card">
+                    <div class="member-avatar-wrap" style="background: linear-gradient(135deg, #5B1B29 0%, #3E101B 100%);">
+                        <i class="fa-solid fa-user-doctor"></i>
+                    </div>
+                    <h3 class="member-name">Salma NasrAllah</h3>
+                    <div class="member-name-ar">سلمى نصر الله</div>
+                    <div class="member-role">Clinical Informatics & Product Lead</div>
+                    <p class="member-desc">
+                        Develops the clinical pharmacovigilance rules, cosmetic ingredient interaction engine, and clinician workspace specifications.
+                    </p>
                 </div>
-                <div class="team-card">
-                    <div class="team-avatar" style="background: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);"><i class="fa-solid fa-palette"></i></div>
-                    <div class="team-name">Salma Khalil</div>
-                    <div class="team-name-ar">سلمى خليل</div>
-                    <div class="team-role">UI/UX & Experience Designer</div>
-                    <p class="team-bio">Crafts patient-centric design systems, accessible medical visualisations, interactive onboarding, and brand identity.</p>
+
+                <!-- Member 4: Salma Khalil -->
+                <div class="member-card">
+                    <div class="member-avatar-wrap" style="background: linear-gradient(135deg, #C5A880 0%, #7A2437 100%);">
+                        <i class="fa-solid fa-palette"></i>
+                    </div>
+                    <h3 class="member-name">Salma Khalil</h3>
+                    <div class="member-name-ar">سلمى خليل</div>
+                    <div class="member-role">UI/UX & Experience Designer</div>
+                    <p class="member-desc">
+                        Crafts patient-first aesthetic design systems, accessible medical telemetry visualizations, brand identity, and intuitive onboarding flows.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section" id="download" style="padding-top: 20px;">
-        <div class="container">
-            <div class="download-cta">
-                <div class="hero-competition-tag" style="margin-bottom: 20px; background: rgba(0,0,0,0.3);">
-                    <i class="fa-solid fa-mobile-screen-button"></i>
-                    <span>Exclusively for Mobile Hardware</span>
-                </div>
-                <h2>Experience Dermaire on Your Phone</h2>
-                <p>
-                    Full hardware camera calibration, on-device face guidance, and live Azure AI skin analysis require high-precision mobile sensors. Download the application on your mobile device to begin your personalized clinical trial.
-                </p>
-                <div class="store-buttons">
-                    <a href="https://github.com/Amr-A-Abdallah/Dermaire-app/releases" target="_blank" class="btn-store">
-                        <i class="fa-brands fa-google-play"></i>
-                        <div class="store-text">
-                            <span>Get it for</span>
-                            <strong>Android (APK)</strong>
-                        </div>
-                    </a>
-                    <a href="https://github.com/Amr-A-Abdallah/Dermaire-app" target="_blank" class="btn-store">
-                        <i class="fa-brands fa-apple"></i>
-                        <div class="store-text">
-                            <span>Available on</span>
-                            <strong>Apple iOS TestFlight</strong>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="nav-brand">
-                    <div class="logo-icon" style="width: 32px; height: 32px; font-size: 15px;"><i class="fa-solid fa-dna"></i></div>
-                    <span style="font-weight: 700; font-size: 18px; color: #fff;">Dermaire</span>
+                <div class="brand-logo">
+                    <div class="team-logo-svg" style="width: 34px; height: 34px;">
+                        <svg width="20" height="20" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20 78V22L50 58L80 22V78" stroke="#C5A880" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <strong style="color: var(--burgundy); font-family: 'Playfair Display', serif; font-size: 18px;">NeoVague</strong>
+                    </div>
                 </div>
-                <div style="display: flex; gap: 24px;">
-                    <a href="/docs" target="_blank" style="color: var(--text-muted); text-decoration: none;">Interactive API</a>
-                    <a href="https://github.com/Amr-A-Abdallah/Dermaire-app" target="_blank" style="color: var(--text-muted); text-decoration: none;">GitHub Repository</a>
+                <div>
+                    <a href="/dermaire" style="color: var(--burgundy); text-decoration: none; font-weight: 700; margin-right: 20px;">Dermaire Product Page</a>
+                    <a href="/docs" target="_blank" style="color: var(--text-muted); text-decoration: none;">API Documentation</a>
                 </div>
             </div>
-            <div style="text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 24px;">
-                <p class="footer-note">
-                    &copy; 2026-2027 Dermaire Personal Skin Lab Team. Created for <strong>Microsoft Imagine Cup 2027</strong>. All rights reserved.
+            <div style="text-align: center; border-top: 1px solid var(--border-subtle); padding-top: 24px;">
+                <p style="font-size: 13px;">
+                    &copy; 2026-2027 <strong>NeoVague Team</strong> · Faculty of Computer and Artificial Intelligence, Helwan University. All rights reserved.
                 </p>
             </div>
         </div>
     </footer>
+
 </body>
 </html>
